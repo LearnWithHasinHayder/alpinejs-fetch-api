@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Quotes - Fetch API AlpineJS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="info" x-data="quote" x-init="getQuote()">
+      <blockquote x-text="content"></blockquote>
+      <p class="author" x-text="author"></p>
+    </div>
+  </div>
+</body>
+<script src="//cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+
+<script>
+  const quote = {
+    content:"",
+    author:"",
+    getQuote(){
+      fetch("https://api.quotable.io/random")
+      .then(res=>res.json())
+      .then(data=>{
+        this.content = data.content
+        this.author = data.author
+      })
+    }
+  }
+</script>
+
+</html>
